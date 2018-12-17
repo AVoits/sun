@@ -1,0 +1,11 @@
+# Common
+node_modules/
+
+
+# Webpack output
+dist/
+
+
+# User-specific stuff
+.idea/
+

@@ -1,16 +1,13 @@
 {
   "compilerOptions": {
-    "target": "esnext",
-    "moduleResolution": "node",
-    "noEmit": true,
-    "strict": true,
-    "esModuleInterop": true,
-    "jsx": "react",
-    "experimentalDecorators": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "allowSyntheticDefaultImports": true,
-    "module": "esnext"
+    "outDir": "./dist/",
+    "sourceMap": true,
+    "noImplicitAny": true,
+    "module": "commonjs",
+    "target": "es5",
+    "jsx": "react"
   },
-  "include": ["src", "@types", "config"]
+  "include": [
+    "./src/**/*"
+  ]
 }

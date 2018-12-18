@@ -6,9 +6,7 @@ interface Props {
 }
 
 const Header: React.StatelessComponent<Props> = () => (
-    <TopBlock>
-        <Header>React-boilerplate</Header>
-    </TopBlock>
+    <TopBlock>Helloooooooo</TopBlock>
 );
 
 const TopBlock = styled.div`

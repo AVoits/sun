@@ -4,25 +4,26 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 
+
 function getBabelOptions() {
     return {
-        cacheDirectory: true,
         babelrc: false,
         presets: [
-            '@babel/env',
-            '@babel/react',
-            '@babel/typescript',
+            "@babel/react",
+            "@babel/typescript",
+            ["@babel/env", { "modules": false }]
         ],
         plugins: [
+            "@babel/proposal-class-properties",
+            "@babel/proposal-object-rest-spread",
             'react-hot-loader/babel',
-            'babel-plugin-styled-components',
             'babel-plugin-styled-components',
         ]
     };
 }
 
 
-function commonLoaders() {
+function commonRules() {
     return [
         {
             test: /\.[tj]sx?$/,
@@ -30,23 +31,30 @@ function commonLoaders() {
             options: getBabelOptions(),
             exclude: /node_modules/,
         },
+        {
+            test: /\.js$/,
+            use: ["source-map-loader"],
+        },
+        {
+            test: /\.css$/,
+            loaders: ['css-loader'],
+        },
     ]
 }
 
 
 module.exports = {
-    entry: path.join(__dirname, 'src/index.js'),
+    entry: path.join(__dirname, "./src/index.ts"),
     output: {
-        path: path.join(__dirname, "/dist"),
-        publicPath: '/',
+        path: path.join(__dirname, "./build"),
         filename: 'bundle.js'
     },
 
     module: {
-        rules: commonLoaders(),
+        rules: commonRules(),
     },
     resolve: {
-        extensions: [ '*', '.ts', '.tsx', '.js', '.jsx']
+        extensions: [ '.ts', '.tsx', '.js', '.jsx', ".json"]
     },
 
     plugins: [
@@ -55,10 +63,5 @@ module.exports = {
         }),
         new webpack.HotModuleReplacementPlugin(),
         new CleanWebpackPlugin(['dist'], {}),
-    ],
-    devServer: {
-        contentBase: './dist',
-        hot: true
-    },
-
+    ]
 };
